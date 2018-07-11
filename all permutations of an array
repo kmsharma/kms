@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void swap(int *x, int *y)
+{
+    int temp;
+    temp = *x;
+    *x = *y;
+    *y = temp;
+}
+void printArray(int *ar, int n, int cnt)
+{
+    for(int i = 0; i<n; i++)
+        cout<<ar[i]<<" ";
+    cout<<" : cnt : "<<cnt<<endl;
+}
+void permute(int *ar, int l, int n)
+{
+    static int cnt = 0;
+    if (l == n)
+    {
+        printArray(ar, n, cnt);
+        ++cnt;
+    }
+    else
+    {    
+        for (int i = l; i<n; i++)
+        {
+            swap(&ar[l], &ar[i]);
+            permute(ar, l+1, n);
+            swap(&ar[i], &ar[l]);
+        }
+    }
+}
+
+int main()
+{
+	int ar[] = {1, 2, 3, 4, 5};
+    int n = sizeof(ar)/sizeof(int);
+    //for (int i =0; i<n; i++)
+        permute(ar, 0, n);
+        
+	return 0;
+}
