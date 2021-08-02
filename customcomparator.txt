@@ -1,0 +1,47 @@
+#include <iostream>
+#include <iterator>
+#include <set>
+using namespace std;
+
+class A
+{
+	public :
+		int x;
+		
+		A(int aa)
+		{
+			x = aa;
+		}
+};
+
+
+struct comp
+{
+	bool operator()(A a1, A a2)
+	{
+		return a1.x < a2.x;
+	}
+};
+
+
+
+int main()
+{
+	A a1(30);
+	A a2(20);
+	A a3(10);
+	set<A, comp> s;
+	s.insert(a1);
+	s.insert(a2);
+	s.insert(a3);
+	
+	
+	set<A>::iterator it;
+	
+	for(it = s.begin(); it != s.end(); it++)
+	{
+		cout<<it->x<<" ";
+	}
+	
+	return 0;
+}
