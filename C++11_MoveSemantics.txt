@@ -16,7 +16,7 @@ public :
 	{}
 
 
-	//with deep copy 
+	//with deep copy (copy constructor)
 	AutoPtr(AutoPtr& obj)
 	{
 		cout << "copy constr..." << endl;
