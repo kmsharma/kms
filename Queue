@@ -1,0 +1,186 @@
+#include <iostream>
+using namespace std;
+
+template <class T>
+class Queue
+{
+T *data;
+int capacity;
+int front;
+int rear;
+int size;
+
+
+public :
+
+Queue(int size)
+{
+    data = new T[size];
+    capacity = size;
+    front = 0;
+    rear = -1;
+    size = 0;
+}
+
+
+Queue(const Queue<T>& queue)
+{
+    this->size = queue.size;
+    this->capacity = queue.capacity;
+    data = new T[this->capacity];
+    for(int i = 0; i < size; i++)
+    {
+    data[i] = queue.data[i];
+}
+}
+
+Queue<T>& operator=(const Queue<T> &queue)
+{
+
+    if (this == &queue)
+    {
+        return *this;
+    }
+
+    delete[] data;
+    this->size = queue.size;
+    this->capacity = queue.capacity;
+    this->data = new T[capacity];
+    this->front = queue.front;
+    this->rear = queue.rear;
+    for(int i = 0; i < size; i++)
+    {
+        data[i] = queue.data[i];
+    }
+
+    return *this;
+}
+
+
+void Enqueue(const T& element)
+{
+    if (this->size == capacity)
+    {
+        //realloc
+        int newCapacity = capacity*2;
+        T *newData = new T[newCapacity];
+        for(int i = 0; i<size; i++)
+        {
+            newData[i] = data[i];
+        }
+        delete[] data;
+        data = newData;
+        this->capacity = newCapacity;
+    }
+
+    rear++;
+    data[rear] = element;
+    size++;
+}
+
+void Dequeue()
+{
+    if (size == 0)
+    {
+      //throw Underflow Exception
+      cout<<"Queue is Empty";
+    }
+
+    front++;
+    size--;
+}
+
+const T& Front()
+{
+    if (size > 0)
+    {
+        return data[front];
+    }
+}
+
+const T& Rear()
+{
+    if (size > 0)
+    {
+        return data[size-1];
+    }
+}
+
+
+int Size()
+{
+    return size;
+}
+
+int Capacity()
+{
+    return capacity;
+}
+
+
+~Queue()
+{
+    if (data != nullptr)
+    {
+        delete[] data;
+        data = nullptr;
+    }
+};
+
+int main()
+{
+    /*
+    Queue<int> queue(5);
+    cout<<"Current Capacity : " << queue.Capacity()<<"\n"; // Expected 5
+    cout<<"Current Size : " << queue.Size()<<"\n"; // Expected 0
+    queue.Enqueue(10);
+    queue.Enqueue(20);
+    queue.Enqueue(30);
+    queue.Enqueue(40);
+    queue.Enqueue(50);
+    queue.Enqueue(60);
+    queue.Enqueue(70);
+
+    cout<<"Current Capacity : " << queue.Capacity()<<"\n"; // Expected 5
+    cout<<"Current Size : " << queue.Size()<<"\n"; // Expected 5
+
+
+    cout<<queue.Front() << "  "; //Expected 10
+
+    cout<<"\n";
+
+
+    queue.Dequeue();
+    queue.Dequeue();
+
+    cout<<"After Dequeue Size : " << queue.Size()<<"\n";      //Expected 3
+
+
+    cout<<queue.Front() << "  "; //Expected 30
+
+    cout<<"\n";
+
+    Queue<int> queue2(5);
+
+    queue2 = queue;
+
+    cout<<"$$$$Current Capacity : " << queue2.Capacity()<<"\n"; // Expected 5
+    cout<<"$$$$Current Size : " << queue2.Size()<<"\n"; // Expected 5
+
+    queue2 = queue2;
+
+    cout<<"####Current Capacity : " << queue2.Capacity()<<"\n"; // Expected 5
+    cout<<"####Current Size : " << queue2.Size()<<"\n"; // Expected 5
+    */
+
+
+
+
+
+    Queue<int> *queue = new Queue<int>(10);
+
+    delete queue;
+
+    delete queue;
+    return 0;
+}
